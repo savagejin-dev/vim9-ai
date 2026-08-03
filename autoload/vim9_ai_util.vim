@@ -228,7 +228,7 @@ enddef
 export def MakeImageMessage(path: string): dict<any>
   var parts = split(path, '\.')
   var ext = len(parts) > 0 ? parts[-1] : ''
-  var b64_image = Base64EncodeFile(path)
+  var b64_image = readblob(path)->base64_encode()
   return {'type': 'image_url', 'image_url': {'url': 'data:image/' .. ext .. ';base64,' .. b64_image}}
 enddef
 
@@ -242,41 +242,8 @@ export def MakeImagePath(ui: dict<any>): string
   return download_dir .. (download_dir =~# '[/\\]$' ? '' : '/') .. filename
 enddef
 
-#  base64 encoding/decoding via platform tools (curl handles the networking)
-def PowerShellQuote(arg: string): string
-  return "'" .. substitute(arg, "'", "''", 'g') .. "'"
-enddef
-
-export def Base64EncodeFile(path: string): string
-  if has('win32')
-    var cmd = 'powershell -NoProfile -Command "[Console]::Out.Write([Convert]::ToBase64String([IO.File]::ReadAllBytes('
-          .. PowerShellQuote(path) .. ')))"'
-    return system(cmd)
-  endif
-  var output = systemlist('base64 ' .. shellescape(path))
-  return join(output, '')
-enddef
-
-export def Base64DecodeToFile(b64_data: string, out_path: string): void
-  var tmp = tempname()
-  writefile([b64_data], tmp)
-  try
-    if has('win32')
-      var cmd = 'powershell -NoProfile -Command "[IO.File]::WriteAllBytes('
-            .. PowerShellQuote(out_path)
-            .. ', [Convert]::FromBase64String((Get-Content -Raw '
-            .. PowerShellQuote(tmp) .. ').Trim()))"'
-      call system(cmd)
-    else
-      call system('base64 -d ' .. shellescape(tmp) .. ' > ' .. shellescape(out_path))
-    endif
-  finally
-    delete(tmp)
-  endtry
-enddef
-
 export def SaveB64ToFile(path: string, b64_data: string): void
-  Base64DecodeToFile(b64_data, path)
+  base64_decode(b64_data)->writefile(path, 'b')
 enddef
 
 #  Runs a shell command with a timeout and returns its stdout.

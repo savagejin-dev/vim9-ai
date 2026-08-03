@@ -8,8 +8,8 @@ if !has('vim9script')
   finish
 endif
 
-if !has('patch-9.0.1669')
-  echoerr 'vim9-ai requires Vim 9.0.1669 or newer (for "import autoload" support)'
+if !has('patch-9.1.0980')
+  echoerr 'vim9-ai requires Vim 9.1.0980 or newer'
   finish
 endif
 
