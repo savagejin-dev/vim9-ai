@@ -1,0 +1,16 @@
+:AI	vim9-ai.txt	/*:AI*
+:AIChat	vim9-ai.txt	/*:AIChat*
+:AIEdit	vim9-ai.txt	/*:AIEdit*
+:AIImage	vim9-ai.txt	/*:AIImage*
+:AIRedo	vim9-ai.txt	/*:AIRedo*
+:AIStopChat	vim9-ai.txt	/*:AIStopChat*
+:AIUtilDebugOff	vim9-ai.txt	/*:AIUtilDebugOff*
+:AIUtilDebugOn	vim9-ai.txt	/*:AIUtilDebugOn*
+:AIUtilRolesOpen	vim9-ai.txt	/*:AIUtilRolesOpen*
+g:vim9_ai_chat_markdown	vim9-ai.txt	/*g:vim9_ai_chat_markdown*
+vim9-ai	vim9-ai.txt	/*vim9-ai*
+vim9-ai-about	vim9-ai.txt	/*vim9-ai-about*
+vim9-ai-commands	vim9-ai.txt	/*vim9-ai-commands*
+vim9-ai-config	vim9-ai.txt	/*vim9-ai-config*
+vim9-ai-include	vim9-ai.txt	/*vim9-ai-include*
+vim9-ai.txt	vim9-ai.txt	/*vim9-ai.txt*
